@@ -44,10 +44,14 @@ public class CrashActivity extends ActionBarActivity {
 	}
 
 	public void crash(View v) {
-		// lets say we need to invalidate our options menu
-		supportInvalidateOptionsMenu();
+		// the order of these is not really important, although I could get better reproducability
+		// if I called supportInvalidateOptionsMenu *after* the setRequestOrientation. (It does
+		// crash both ways, I just had a harder time reproducing it on an emulator if I called
+		// invalidate first.
+
 		// A wild configuration change appeared!
 		// Configuration change used crash. It's super effective!
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		supportInvalidateOptionsMenu();
 	}
 }

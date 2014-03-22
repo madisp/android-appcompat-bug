@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">AppCompatBug</string>
-    <string name="label_crash">Press the button below to crash on 2.3</string>
+    <string name="label_crash">Press the button below to crash on 2.3. Note that it may take several tries.</string>
     <string name="btn_crash">crash</string>
 </resources>
