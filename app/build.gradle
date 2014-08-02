@@ -1,8 +1,17 @@
 apply plugin: 'android'
 
+def releaseSigningFile = file('signing/release.properties')
+def releaseSigning = new Properties()
+
+if (releaseSigningFile.exists()) {
+    releaseSigningFile.withReader('UTF-8') {
+        releaseSigning.load(it)
+    }
+}
+
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion "20.0.0"
 
     defaultConfig {
         minSdkVersion 8
@@ -10,10 +19,22 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    signingConfigs {
+        release {
+            if (releaseSigningFile.exists()) {
+                storeFile file(releaseSigning['keystore.path'])
+                storePassword releaseSigning['keystore.password']
+                keyAlias releaseSigning['key.alias']
+                keyPassword releaseSigning['key.password']
+            }
+        }
+    }
+
     buildTypes {
         release {
             runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
         }
     }
 }
