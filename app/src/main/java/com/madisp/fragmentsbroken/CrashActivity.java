@@ -51,7 +51,7 @@ public class CrashActivity extends ActionBarActivity {
 
 		// A wild configuration change appeared!
 		// Configuration change used crash. It's super effective!
-		recreate();
 		supportInvalidateOptionsMenu();
+		recreate();
 	}
 }
