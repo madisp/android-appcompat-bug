@@ -1,8 +1,8 @@
 package com.madisp.fragmentsbroken;
 
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 /**
@@ -35,10 +35,10 @@ public class CrashActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// force to portrait so we can easily trigger a conf change later (orienting to landscape)
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		// just a framelayout with id=@id/main
 		setContentView(R.layout.main);
+		// set up our toolbar
+		setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 		// add a standard fragment with a few views and a menu option
 		getSupportFragmentManager().beginTransaction().add(R.id.main, new CrashFragment()).commit();
 	}
@@ -51,7 +51,7 @@ public class CrashActivity extends ActionBarActivity {
 
 		// A wild configuration change appeared!
 		// Configuration change used crash. It's super effective!
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		recreate();
 		supportInvalidateOptionsMenu();
 	}
 }
